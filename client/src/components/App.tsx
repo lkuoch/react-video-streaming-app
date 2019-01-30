@@ -9,7 +9,7 @@ import StreamDelete from "./streams/StreamDelete";
 import StreamEdit from "./streams/StreamEdit";
 import StreamList from "./streams/StreamList";
 import StreamShow from "./streams/StreamShow";
-import Header from "./Header";
+import Header from "./header/Header";
 
 class App extends Component {
   render() {

@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import AuthSlice from "../redux/AuthSlice";
-
+import AuthSlice, { IAuthProps, IAuthState } from "../../redux/AuthSlice";
 import Config from "../../configs/Config";
 
-class GoogleAuth extends Component<any, any> {
-  //* Class props
-  auth: gapi.auth2.GoogleAuth | null = null;
+//# Prop interface for this component
+interface IGoogleAuthProps extends IAuthProps {}
 
+class GoogleAuth extends Component<IGoogleAuthProps, {}> {
   componentDidMount() {
     gapi.load("client:auth2", () => {
       gapi.auth2
@@ -17,9 +16,9 @@ class GoogleAuth extends Component<any, any> {
           scope: "email"
         })
         .then(() => {
-          this.auth = gapi.auth2.getAuthInstance();
-          this.onAuthChanged(this.auth.isSignedIn.get());
-          this.auth.isSignedIn.listen(this.onAuthChanged);
+          this.props.LoadGAPIAuthClient(gapi.auth2.getAuthInstance());
+          this.onAuthChanged(this.props.gAPIAuthClient!.isSignedIn.get());
+          this.props.gAPIAuthClient!.isSignedIn.listen(this.onAuthChanged);
         });
     });
   }
@@ -51,17 +50,15 @@ class GoogleAuth extends Component<any, any> {
   }
 
   onAuthChanged = (isSignedIn: boolean) => {
-    isSignedIn
-      ? this.props.signIn(this.auth!.currentUser.get().getId())
-      : this.props.signOut();
+    isSignedIn ? this.props.SignIn() : this.props.SignOut();
   };
 
   onSignInClick = () => {
-    this.auth!.signIn();
+    this.props.gAPIAuthClient!.signIn();
   };
 
   onSignOutClick = () => {
-    this.auth!.signOut();
+    this.props.gAPIAuthClient!.signOut();
   };
 
   render() {
@@ -69,11 +66,11 @@ class GoogleAuth extends Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: any) => {
-  console.log(state);
+const mapStateToProps = ({ AuthSlice }: { AuthSlice: IAuthState }) => {
   return {
-    isSignedIn: state.Auth.isSignedIn,
-    userId: state.Auth.userId
+    isSignedIn: AuthSlice.isSignedIn,
+    userId: AuthSlice.userId,
+    gAPIAuthClient: AuthSlice.gAPIAuthClient
   };
 };
 

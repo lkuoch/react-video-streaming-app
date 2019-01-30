@@ -4,11 +4,11 @@ import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 
 import App from "./components/App";
-import AuthSlice from "./components/redux/AuthSlice";
+import AuthSlice from "./redux/AuthSlice";
 
 //~ Set up redux store
 const reducer = combineReducers({
-  Auth: AuthSlice.reducer
+  AuthSlice: AuthSlice.reducer
 });
 
 const store = createStore(reducer);
