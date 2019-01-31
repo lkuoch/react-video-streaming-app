@@ -4,14 +4,14 @@ import { createSlice } from "redux-starter-kit";
 export interface IAuthState {
   isSignedIn: boolean | null;
   userId: string | null;
-  gAPIAuthClient?: gapi.auth2.GoogleAuth | null;
+  gAPIAuthInstace?: gapi.auth2.GoogleAuth | null;
 }
 
 //# AuthSlice Availabe Prop Methods
 export interface IAuthProps extends IAuthState {
   SignIn: (action?: any) => void;
   SignOut: (action?: any) => void;
-  LoadGAPIAuthClient: (action?: gapi.auth2.GoogleAuth) => void;
+  LoadGAPIAuthInstance: (action?: gapi.auth2.GoogleAuth) => void;
 }
 
 const AuthSlice = createSlice({
@@ -30,14 +30,14 @@ const AuthSlice = createSlice({
   reducers: {
     SignIn: (state, action) => {
       state.isSignedIn = true;
-      state.userId = state.gAPIAuthClient!.currentUser.get().getId();
+      state.userId = state.gAPIAuthInstace!.currentUser.get().getId();
     },
     SignOut: (state, action) => {
       state.isSignedIn = false;
       state.userId = null;
     },
-    LoadGAPIAuthClient: (state, action) => {
-      state.gAPIAuthClient = action.payload;
+    LoadGAPIAuthInstance: (state, action) => {
+      state.gAPIAuthInstace = action.payload;
     }
   }
 });

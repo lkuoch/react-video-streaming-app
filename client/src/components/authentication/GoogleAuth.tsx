@@ -16,9 +16,9 @@ class GoogleAuth extends Component<IGoogleAuthProps, {}> {
           scope: "email"
         })
         .then(() => {
-          this.props.LoadGAPIAuthClient(gapi.auth2.getAuthInstance());
-          this.onAuthChanged(this.props.gAPIAuthClient!.isSignedIn.get());
-          this.props.gAPIAuthClient!.isSignedIn.listen(this.onAuthChanged);
+          this.props.LoadGAPIAuthInstance(gapi.auth2.getAuthInstance());
+          this.onAuthChanged(this.props.gAPIAuthInstace!.isSignedIn.get());
+          this.props.gAPIAuthInstace!.isSignedIn.listen(this.onAuthChanged);
         });
     });
   }
@@ -54,11 +54,11 @@ class GoogleAuth extends Component<IGoogleAuthProps, {}> {
   };
 
   onSignInClick = () => {
-    this.props.gAPIAuthClient!.signIn();
+    this.props.gAPIAuthInstace!.signIn();
   };
 
   onSignOutClick = () => {
-    this.props.gAPIAuthClient!.signOut();
+    this.props.gAPIAuthInstace!.signOut();
   };
 
   render() {
@@ -70,11 +70,16 @@ const mapStateToProps = ({ AuthSlice }: { AuthSlice: IAuthState }) => {
   return {
     isSignedIn: AuthSlice.isSignedIn,
     userId: AuthSlice.userId,
-    gAPIAuthClient: AuthSlice.gAPIAuthClient
+    gAPIAuthInstace: AuthSlice.gAPIAuthInstace
   };
 };
 
 export default connect(
   mapStateToProps,
-  AuthSlice.actions
+  //# Can use object destructuring below or `AuthSlice.actions` instead
+  {
+    SignIn: AuthSlice.actions.SignIn,
+    SignOut: AuthSlice.actions.SignOut,
+    LoadGAPIAuthInstance: AuthSlice.actions.LoadGAPIAuthInstance
+  }
 )(GoogleAuth);
