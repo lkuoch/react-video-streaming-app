@@ -18,11 +18,15 @@ class App extends Component {
         <BrowserRouter>
           <React.Fragment>
             <Header />
-            <Route path="/" exact component={StreamList} />
-            <Route path="/streams/new" exact component={StreamCreate} />
-            <Route path="/streams/edit" exact component={StreamEdit} />
-            <Route path="/streams/delete" exact component={StreamDelete} />
-            <Route path="/streams/show" exact component={StreamShow} />
+            <Route exact path="/" component={StreamList} />
+            <Route
+              exact
+              path="/streams/new"
+              component={() => <StreamCreate />}
+            />
+            <Route exact path="/streams/edit" component={StreamEdit} />
+            <Route exact path="/streams/delete" component={StreamDelete} />
+            <Route exact path="/streams/show" component={StreamShow} />
           </React.Fragment>
         </BrowserRouter>
       </div>

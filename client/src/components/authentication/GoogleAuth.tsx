@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import AuthSlice, { IAuthProps, IAuthState } from "../../redux/AuthSlice";
+import AuthUnit, { IAuthProps, IAuthState } from "../../redux/AuthUnit";
 import Config from "../../configs/Config";
 
 //# Prop interface for this component
-interface IGoogleAuthProps extends IAuthProps {}
+interface IProps extends IAuthProps {}
 
-class GoogleAuth extends Component<IGoogleAuthProps, {}> {
+class GoogleAuth extends Component<IProps, {}> {
   componentDidMount() {
     gapi.load("client:auth2", () => {
       gapi.auth2
@@ -16,9 +16,9 @@ class GoogleAuth extends Component<IGoogleAuthProps, {}> {
           scope: "email"
         })
         .then(() => {
-          this.props.LoadGAPIAuthInstance(gapi.auth2.getAuthInstance());
-          this.onAuthChanged(this.props.gAPIAuthInstace!.isSignedIn.get());
-          this.props.gAPIAuthInstace!.isSignedIn.listen(this.onAuthChanged);
+          this.props.INIT_GAPI_INSTANCE(gapi.auth2.getAuthInstance());
+          this.onAuthChanged(this.props.gAPIAuthInstance!.isSignedIn.get());
+          this.props.gAPIAuthInstance!.isSignedIn.listen(this.onAuthChanged);
         });
     });
   }
@@ -50,15 +50,15 @@ class GoogleAuth extends Component<IGoogleAuthProps, {}> {
   }
 
   onAuthChanged = (isSignedIn: boolean) => {
-    isSignedIn ? this.props.SignIn() : this.props.SignOut();
+    isSignedIn ? this.props.SIGN_IN() : this.props.SIGN_OUT();
   };
 
   onSignInClick = () => {
-    this.props.gAPIAuthInstace!.signIn();
+    this.props.gAPIAuthInstance!.signIn();
   };
 
   onSignOutClick = () => {
-    this.props.gAPIAuthInstace!.signOut();
+    this.props.gAPIAuthInstance!.signOut();
   };
 
   render() {
@@ -66,20 +66,20 @@ class GoogleAuth extends Component<IGoogleAuthProps, {}> {
   }
 }
 
-const mapStateToProps = ({ AuthSlice }: { AuthSlice: IAuthState }) => {
+const mapStateToProps = ({ AuthUnit }: { AuthUnit: IAuthState }) => {
   return {
-    isSignedIn: AuthSlice.isSignedIn,
-    userId: AuthSlice.userId,
-    gAPIAuthInstace: AuthSlice.gAPIAuthInstace
+    isSignedIn: AuthUnit.isSignedIn,
+    userId: AuthUnit.userId,
+    gAPIAuthInstance: AuthUnit.gAPIAuthInstance
   };
 };
 
 export default connect(
   mapStateToProps,
-  //# Can use object destructuring below or `AuthSlice.actions` instead
+  //# Can use object destructuring below or `AuthUnit.actions` instead
   {
-    SignIn: AuthSlice.actions.SignIn,
-    SignOut: AuthSlice.actions.SignOut,
-    LoadGAPIAuthInstance: AuthSlice.actions.LoadGAPIAuthInstance
+    SIGN_IN: AuthUnit.actions.SIGN_IN,
+    SIGN_OUT: AuthUnit.actions.SIGN_OUT,
+    INIT_GAPI_INSTANCE: AuthUnit.actions.INIT_GAPI_INSTANCE
   }
 )(GoogleAuth);
