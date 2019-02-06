@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { reducer as reduxFormReducer } from "redux-form";
+import { reducer as formReducer } from "redux-form";
 import { Provider } from "react-redux";
 import { combineReducers } from "redux";
 import thunk from "redux-thunk";
@@ -12,7 +12,7 @@ import { configureStore } from "redux-starter-kit";
 //~ Set up redux store
 const reducer = combineReducers({
   AuthUnit: AuthUnit.reducer,
-  Form: reduxFormReducer
+  form: formReducer
 });
 
 const store = configureStore({
