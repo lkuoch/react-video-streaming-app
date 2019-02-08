@@ -14,7 +14,11 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "types": ["gapi", "gapi.auth2"]
+    "types": ["gapi", "gapi.auth2"],
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "alwaysStrict": true,
+    "noImplicitReturns": true
   },
   "include": ["src"]
 }

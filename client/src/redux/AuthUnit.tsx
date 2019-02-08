@@ -1,4 +1,4 @@
-import { createSlice } from "redux-starter-kit";
+import { PayloadAction, createSlice } from "redux-starter-kit";
 
 //# AuthUnit State Schema
 export interface IAuthState {
@@ -16,7 +16,7 @@ export interface IAuthProps extends IAuthState {
 
 const AuthUnit = createSlice({
   //~ Slice name
-  slice: "AUTH_UNIT",
+  slice: "auth_unit",
 
   //~ Initial slice state
   initialState: {
@@ -28,15 +28,15 @@ const AuthUnit = createSlice({
 
   //~ Reducers
   reducers: {
-    SIGN_IN: (state, action) => {
+    SIGN_IN: (state: IAuthState, _action: PayloadAction) => {
       state.isSignedIn = true;
       state.userId = state.gAPIAuthInstance!.currentUser.get().getId();
     },
-    SIGN_OUT: (state, action) => {
+    SIGN_OUT: (state: IAuthState, _action: PayloadAction) => {
       state.isSignedIn = false;
       state.userId = null;
     },
-    INIT_GAPI_INSTANCE: (state, action) => {
+    INIT_GAPI_INSTANCE: (state: IAuthState, action: PayloadAction) => {
       state.gAPIAuthInstance = action.payload;
     }
   }

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-
 import AuthUnit, { IAuthProps, IAuthState } from "../../redux/AuthUnit";
+import React, { Component } from "react";
+
 import Config from "../../configs/Config";
+import { connect } from "react-redux";
 
 //# Prop interface for this component
 interface IProps extends IAuthProps {}
@@ -26,6 +26,7 @@ class GoogleAuth extends Component<IProps, {}> {
   renderAuthButton() {
     //* Still initialising - display nothing
     if (this.props.isSignedIn === null) {
+      return null;
     } else if (this.props.isSignedIn) {
       return (
         <button
@@ -66,17 +67,17 @@ class GoogleAuth extends Component<IProps, {}> {
   }
 }
 
-const mapStateToProps = ({ AuthUnit }: { AuthUnit: IAuthState }) => {
+const mapStateToProps = ({ auth_unit }: { auth_unit: IAuthState }) => {
   return {
-    isSignedIn: AuthUnit.isSignedIn,
-    userId: AuthUnit.userId,
-    gAPIAuthInstance: AuthUnit.gAPIAuthInstance
+    isSignedIn: auth_unit.isSignedIn,
+    userId: auth_unit.userId,
+    gAPIAuthInstance: auth_unit.gAPIAuthInstance
   };
 };
 
 export default connect(
   mapStateToProps,
-  //# Can use object destructuring below or `AuthUnit.actions` instead
+  //# Can use object destructuring below or `auth_unit.actions` instead
   {
     SIGN_IN: AuthUnit.actions.SIGN_IN,
     SIGN_OUT: AuthUnit.actions.SIGN_OUT,
