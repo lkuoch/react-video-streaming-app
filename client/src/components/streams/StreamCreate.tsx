@@ -1,6 +1,5 @@
+import { Field, FormErrors, InjectedFormProps, reduxForm } from "redux-form";
 import React, { Component } from "react";
-import { Field, reduxForm, InjectedFormProps } from "redux-form";
-import { compose } from "redux";
 
 interface IProps {
   title?: string;
@@ -8,17 +7,30 @@ interface IProps {
 }
 
 class StreamCreate extends Component<IProps & InjectedFormProps, any> {
-  renderField({ input, label, type, meta: { touched, error } }: any) {
-    // Render form field
+  renderError({ error, touched }: any) {
+    if (touched && error) {
+      return (
+        <div className="ui error message">
+          <div className="header">{error}</div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
+
+  renderField = ({ input, label, type, meta }: any) => {
+    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
     return (
-      <div className="field">
+      <div className={className}>
         <label>{label}</label>
         <div className="ui fluid input">
           <input {...input} placeholder={label} type={type} />
         </div>
+        {this.renderError(meta)}
       </div>
     );
-  }
+  };
 
   onSubmit(formValues: IProps) {
     console.log(formValues);
@@ -28,7 +40,7 @@ class StreamCreate extends Component<IProps & InjectedFormProps, any> {
     const { submitting, handleSubmit, pristine } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.onSubmit)} className="ui form">
+      <form onSubmit={handleSubmit(this.onSubmit)} className="ui error form">
         <div className="ui segment">
           <Field
             name="title"
@@ -58,6 +70,22 @@ class StreamCreate extends Component<IProps & InjectedFormProps, any> {
   }
 }
 
+interface IFormErrors {
+  title?: string;
+}
+
+//~ Validate form values
+const validate = (formValues: IProps): IFormErrors & FormErrors => {
+  if (!formValues.title) {
+    return {
+      title: "You must enter a title"
+    } as IFormErrors;
+  }
+
+  return {};
+};
+
 export default reduxForm<any, any>({
-  form: "streamCreate"
+  form: "streamCreate",
+  validate
 })(StreamCreate);
