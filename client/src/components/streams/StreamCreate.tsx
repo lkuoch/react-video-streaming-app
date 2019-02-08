@@ -1,4 +1,10 @@
-import { Field, FormErrors, InjectedFormProps, reduxForm } from "redux-form";
+import {
+  Field,
+  FormErrors,
+  InjectedFormProps,
+  WrappedFieldMetaProps,
+  reduxForm
+} from "redux-form";
 import React, { Component } from "react";
 
 interface IProps {
@@ -7,11 +13,12 @@ interface IProps {
 }
 
 class StreamCreate extends Component<IProps & InjectedFormProps, any> {
-  renderError({ error, touched }: any) {
+  renderError({ error, touched }: WrappedFieldMetaProps) {
     if (touched && error) {
       return (
         <div className="ui error message">
-          <div className="header">{error}</div>
+          <div className="header">{error[0]}</div>
+          <p>{error[1]}</p>
         </div>
       );
     } else {
@@ -20,6 +27,8 @@ class StreamCreate extends Component<IProps & InjectedFormProps, any> {
   }
 
   renderField = ({ input, label, type, meta }: any) => {
+    console.log(meta);
+
     const className = `field ${meta.error && meta.touched ? "error" : ""}`;
     return (
       <div className={className}>
@@ -71,18 +80,18 @@ class StreamCreate extends Component<IProps & InjectedFormProps, any> {
 }
 
 interface IFormErrors {
-  title?: string;
+  title?: string[];
 }
 
 //~ Validate form values
 const validate = (formValues: IProps): IFormErrors & FormErrors => {
   if (!formValues.title) {
     return {
-      title: "You must enter a title"
+      title: ["You must enter a title", "Error description"]
     } as IFormErrors;
   }
 
-  return {};
+  return [];
 };
 
 export default reduxForm<any, any>({
