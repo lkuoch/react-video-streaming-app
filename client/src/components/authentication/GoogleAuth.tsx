@@ -77,7 +77,7 @@ const mapStateToProps = ({ auth_unit }: { auth_unit: IAuthState }) => {
 
 export default connect(
   mapStateToProps,
-  //# Can use object destructuring below or `auth_unit.actions` instead
+  //# Can use object destructuring below or `AuthUnit.actions` instead
   {
     SIGN_IN: AuthUnit.actions.SIGN_IN,
     SIGN_OUT: AuthUnit.actions.SIGN_OUT,

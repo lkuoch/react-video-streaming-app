@@ -1,10 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import Debugger from "../../util/Debugger";
 import GoogleAuth from "../authentication/GoogleAuth";
+import { Link } from "react-router-dom";
+import React from "react";
 
 const Header = () => {
   return (
     <div className="ui secondary pointing menu">
+      <Debugger />
       <Link to="/" className="item">
         Streamer
       </Link>
