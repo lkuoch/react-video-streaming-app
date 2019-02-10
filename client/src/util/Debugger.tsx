@@ -3,25 +3,28 @@ import DebugUnit, { IDebugProps, IDebugState } from "../redux/DebugUnit";
 import React from "react";
 import { connect } from "react-redux";
 
-class Debugger extends React.Component<IDebugProps, any> {
-  toggleDebug = () => {
-    this.props.debugEnabled ? this.props.DEBUG_OFF() : this.props.DEBUG_ON();
-  };
+//# Debug text
+const debugMeta = {
+  title: "Debug 🐞"
+};
 
-  render() {
-    // TODO (Set up permissions)
-    return (
-      <button
-        className={
-          "ui toggle button " + (this.props.debugEnabled ? "active" : "")
-        }
-        onClick={() => this.toggleDebug()}
-      >
-        Debug 🐞
-      </button>
-    );
-  }
-}
+//* Render debug button
+const DebugButton = (props: IDebugProps) => {
+  const { debugEnabled } = props;
+
+  return (
+    <button
+      className={"ui toggle button " + (debugEnabled ? "active" : "")}
+      onClick={() => toggleDebugButton(props)}
+    >
+      {debugMeta.title}
+    </button>
+  );
+};
+
+const toggleDebugButton = (props: IDebugProps) => {
+  props.debugEnabled ? props.DEBUG_OFF() : props.DEBUG_ON();
+};
 
 const mapStateToProps = ({ debug_unit }: { debug_unit: IDebugState }) => {
   return {
@@ -33,4 +36,4 @@ const mapStateToProps = ({ debug_unit }: { debug_unit: IDebugState }) => {
 export default connect(
   mapStateToProps,
   DebugUnit.actions
-)(Debugger);
+)(DebugButton);

@@ -7,9 +7,11 @@ const Header = () => {
   return (
     <div className="ui secondary pointing menu">
       <Debugger />
-      <Link to="/" className="item">
-        Streamer
-      </Link>
+      <div className="ui labeled button">
+        <Link to="/streams/new" className="ui red button">
+          Create Stream
+        </Link>
+      </div>
       <div className="right menu">
         <Link to="/" className="item">
           All Streams
