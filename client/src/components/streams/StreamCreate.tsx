@@ -1,23 +1,32 @@
 import { Field, Form } from "react-final-form";
 
 import DebugFormResultsView from "../../util/DebugFormResultsView";
+import ApiModule, { IApiProps, IApiState } from "../../redux/ApiModule";
 import React, { useState, useEffect } from "react";
 import RenderCounter from "../../util/RenderCounter";
 
+import { connect } from "react-redux";
+
 import { store } from "../../index";
 
-interface IProps {
+interface IValues {
   title?: string;
   description?: string;
 }
+
+interface IProps extends IApiProps {}
 
 //# Simulate processing - sleep for the desired amount of time
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 //# Callback when submitting form
-const onSubmit = async (values: IProps) => {
-  await sleep(300);
-  console.log("form submitted");
+const onSubmit = async (values: IValues, props: any) => {
+  // sleep(300);
+  console.log(props);
+
+  console.log(values, "form submitted");
+
+  props.CREATE_STREAM("asdasdasdas");
 };
 
 interface IError {
@@ -27,7 +36,9 @@ interface IError {
 
 //# Validators
 const mandatoryField = (value: any) => {
-  if (value) return undefined;
+  if (value) {
+    return undefined;
+  }
 
   return {
     short: "Mandatory field validation failed",
@@ -116,8 +127,8 @@ const renderField = ({ input, label, type, id, meta }: any) => {
 
   //* Poll for global store setting the debugEnabled flag
   useEffect(() => {
-    setDebugOn(store.getState().debug_unit.debugEnabled);
-  }, [store.getState().debug_unit.debugEnabled]);
+    setDebugOn(store.getState().debug_module.debugEnabled);
+  }, [store.getState().debug_module.debugEnabled]);
 
   //* Conditionally insert debug counter if applicable
   let renderDebugCounter = debugOn ? (
@@ -136,14 +147,14 @@ const renderField = ({ input, label, type, id, meta }: any) => {
   );
 };
 
-const StreamCreate = () => {
+const StreamCreate = (props: any) => {
   return (
     <div className="CreateStreamForm">
       <Form
-        onSubmit={onSubmit}
         subscription={{ submitting: true, pristine: true }}
+        onSubmit={val => onSubmit(val, props)}
         render={({ handleSubmit, reset, submitting, pristine, values }) => (
-          <form onSubmit={handleSubmit} className="ui error form">
+          <form className="ui error form" onSubmit={handleSubmit}>
             <Field
               name="title"
               label="Enter Title"
@@ -179,4 +190,9 @@ const StreamCreate = () => {
   );
 };
 
-export default StreamCreate;
+export default connect(
+  null,
+  {
+    CREATE_STREAM: ApiModule.actions.CREATE_STREAM
+  }
+)(StreamCreate);

@@ -67,11 +67,11 @@ class GoogleAuth extends Component<IProps, {}> {
   }
 }
 
-const mapStateToProps = ({ auth_unit }: { auth_unit: IAuthState }) => {
+const mapStateToProps = ({ auth_module }: { auth_module: IAuthState }) => {
   return {
-    isSignedIn: auth_unit.isSignedIn,
-    userId: auth_unit.userId,
-    gAPIAuthInstance: auth_unit.gAPIAuthInstance
+    isSignedIn: auth_module.isSignedIn,
+    userId: auth_module.userId,
+    gAPIAuthInstance: auth_module.gAPIAuthInstance
   };
 };
 

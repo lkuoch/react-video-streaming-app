@@ -1,5 +1,6 @@
 import App from "./components/App";
 import AuthModule from "./redux/AuthModule";
+import ApiModule from "./redux/ApiModule";
 import DebugModule from "./redux/DebugModule";
 import { Provider } from "react-redux";
 import React from "react";
@@ -10,8 +11,9 @@ import thunk from "redux-thunk";
 
 //# Set up redux store
 const reducer = combineReducers({
-  auth_unit: AuthModule.reducer,
-  debug_unit: DebugModule.reducer
+  auth_module: AuthModule.reducer,
+  api_module: ApiModule.reducer,
+  debug_module: DebugModule.reducer
 });
 
 export const store = configureStore({

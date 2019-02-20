@@ -38,10 +38,10 @@ const RenderCounter = (props: IProps) => {
   return props.debugEnabled ? <Circle>{renders}</Circle> : null;
 };
 
-const mapStateToProps = ({ debug_unit }: { debug_unit: IDebugState }) => {
+const mapStateToProps = ({ debug_module }: { debug_module: IDebugState }) => {
   return {
-    hasPermission: debug_unit.hasPermission,
-    debugEnabled: debug_unit.debugEnabled
+    hasPermission: debug_module.hasPermission,
+    debugEnabled: debug_module.debugEnabled
   };
 };
 
