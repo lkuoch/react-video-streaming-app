@@ -8,16 +8,16 @@ export interface IDebugState {
   debugEnabled: boolean;
 }
 
-//# DebugUnit Available Prop Methods
+//# DebugModule Available Prop Methods
 export interface IDebugProps extends IDebugState {
   SET_PERMISSION: (action?: any) => void;
   DEBUG_ON: (action?: any) => void;
   DEBUG_OFF: (action?: any) => void;
 }
 
-const DebugUnit = createSlice({
+const DebugModule = createSlice({
   //~ Slice name
-  slice: "debug_unit",
+  slice: "debug_module",
 
   //~ Initial slice state
   initialState: {
@@ -39,4 +39,4 @@ const DebugUnit = createSlice({
   }
 });
 
-export default DebugUnit;
+export default DebugModule;

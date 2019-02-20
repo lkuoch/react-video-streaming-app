@@ -1,22 +1,22 @@
 import { PayloadAction, createSlice } from "redux-starter-kit";
 
-//# AuthUnit State Schema
+//# AuthModule State Schema
 export interface IAuthState {
   isSignedIn: boolean | null;
   userId: string | null;
   gAPIAuthInstance?: gapi.auth2.GoogleAuth | null;
 }
 
-//# AuthUnit Availabe Prop Methods
+//# AuthModule Availabe Prop Methods
 export interface IAuthProps extends IAuthState {
   SIGN_IN: (action?: any) => void;
   SIGN_OUT: (action?: any) => void;
   INIT_GAPI_INSTANCE: (action?: gapi.auth2.GoogleAuth) => void;
 }
 
-const AuthUnit = createSlice({
+const AuthModule = createSlice({
   //~ Slice name
-  slice: "auth_unit",
+  slice: "auth_module",
 
   //~ Initial slice state
   initialState: {
@@ -42,4 +42,4 @@ const AuthUnit = createSlice({
   }
 });
 
-export default AuthUnit;
+export default AuthModule;

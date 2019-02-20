@@ -1,10 +1,10 @@
-import DebugUnit, { IDebugProps, IDebugState } from "../redux/DebugUnit";
-import React, { Component } from "react";
+import DebugModule, { IDebugProps, IDebugState } from "../redux/DebugModule";
+import React, { useState, Component, useEffect } from "react";
 
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-// Styles
+//* Styles
 const size = 30;
 const Circle = styled.i`
   position: absolute;
@@ -20,15 +20,23 @@ const Circle = styled.i`
   background: #eee;
 `;
 
-class RenderCounter extends Component<IDebugProps, any> {
-  renders = 0;
-
-  render() {
-    return this.props.debugEnabled ? (
-      <Circle>{(this.renders += 1)}</Circle>
-    ) : null;
-  }
+//# Prop interface for this component
+interface IProps extends IDebugProps {
+  //* From StreamCreate
+  inputDebugEvent: Object;
 }
+
+const RenderCounter = (props: IProps) => {
+  //* Local render count
+  const [renders, setRenders] = useState(0);
+
+  //* Increment the renders whenever a `inputDebugEvent` changes
+  useEffect(() => {
+    setRenders(renders + 1);
+  }, [props.inputDebugEvent]);
+
+  return props.debugEnabled ? <Circle>{renders}</Circle> : null;
+};
 
 const mapStateToProps = ({ debug_unit }: { debug_unit: IDebugState }) => {
   return {
@@ -39,5 +47,5 @@ const mapStateToProps = ({ debug_unit }: { debug_unit: IDebugState }) => {
 
 export default connect(
   mapStateToProps,
-  DebugUnit.actions
+  DebugModule.actions
 )(RenderCounter);

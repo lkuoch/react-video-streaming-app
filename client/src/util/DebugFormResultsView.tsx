@@ -1,4 +1,4 @@
-import DebugUnit, { IDebugProps, IDebugState } from "../redux/DebugUnit";
+import DebugModule, { IDebugProps, IDebugState } from "../redux/DebugModule";
 import React, { Component } from "react";
 
 import { FormSpy } from "react-final-form";
@@ -23,5 +23,5 @@ const mapStateToProps = ({ debug_unit }: { debug_unit: IDebugState }) => {
 
 export default connect(
   mapStateToProps,
-  DebugUnit.actions
+  DebugModule.actions
 )(DebugFormResultsView);

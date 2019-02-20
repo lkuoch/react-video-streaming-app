@@ -1,4 +1,4 @@
-import AuthUnit, { IAuthProps, IAuthState } from "../../redux/AuthUnit";
+import AuthModule, { IAuthProps, IAuthState } from "../../redux/AuthModule";
 import React, { Component } from "react";
 
 import Config from "../../configs/Config";
@@ -77,10 +77,10 @@ const mapStateToProps = ({ auth_unit }: { auth_unit: IAuthState }) => {
 
 export default connect(
   mapStateToProps,
-  //# Can use object destructuring below or `AuthUnit.actions` instead
+  //# Can use object destructuring below or `AuthModule.actions` instead
   {
-    SIGN_IN: AuthUnit.actions.SIGN_IN,
-    SIGN_OUT: AuthUnit.actions.SIGN_OUT,
-    INIT_GAPI_INSTANCE: AuthUnit.actions.INIT_GAPI_INSTANCE
+    SIGN_IN: AuthModule.actions.SIGN_IN,
+    SIGN_OUT: AuthModule.actions.SIGN_OUT,
+    INIT_GAPI_INSTANCE: AuthModule.actions.INIT_GAPI_INSTANCE
   }
 )(GoogleAuth);

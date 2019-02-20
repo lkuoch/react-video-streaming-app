@@ -1,8 +1,10 @@
-import { Field, Form, FormSpy } from "react-final-form";
+import { Field, Form } from "react-final-form";
 
 import DebugFormResultsView from "../../util/DebugFormResultsView";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import RenderCounter from "../../util/RenderCounter";
+
+import { store } from "../../index";
 
 interface IProps {
   title?: string;
@@ -108,12 +110,26 @@ const renderError = ({ error, touched }: { error: IError; touched: any }) => {
 const renderField = ({ input, label, type, id, meta }: any) => {
   const className = `field ${meta.error && meta.touched ? "error" : ""}`;
 
+  //* Debug states
+  const [debugOn, setDebugOn] = useState(false);
+  const [debugEvent, setDebugEvent] = useState({});
+
+  //* Poll for global store setting the debugEnabled flag
+  useEffect(() => {
+    setDebugOn(store.getState().debug_unit.debugEnabled);
+  }, [store.getState().debug_unit.debugEnabled]);
+
+  //* Conditionally insert debug counter if applicable
+  let renderDebugCounter = debugOn ? (
+    <RenderCounter inputDebugEvent={debugEvent} />
+  ) : null;
+
   return (
     <div className={className} key={id}>
       <label>{label}</label>
-      <div className="ui fluid input">
-        <RenderCounter />
+      <div className="ui fluid input" onChange={e => setDebugEvent(e)}>
         <input {...input} placeholder={label} type={type} />
+        {renderDebugCounter}
       </div>
       {renderError(meta)}
     </div>

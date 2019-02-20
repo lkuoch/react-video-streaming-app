@@ -1,6 +1,6 @@
-import DebugUnit, { IDebugProps, IDebugState } from "../redux/DebugUnit";
+import DebugModule, { IDebugProps, IDebugState } from "../redux/DebugModule";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 //# Debug text
@@ -8,22 +8,24 @@ const debugMeta = {
   title: "Debug 🐞"
 };
 
-//* Render debug button
+//# Render debug button
 const DebugButton = (props: IDebugProps) => {
-  const { debugEnabled } = props;
+  //* Track locally whether or not the debug is on or off
+  const [debugEnabled, setDebugEnabled] = useState(false);
+
+  //* Whenever, the local state is changed we will sync it with the global redux state
+  useEffect(() => {
+    debugEnabled ? props.DEBUG_ON() : props.DEBUG_OFF();
+  }, [debugEnabled]);
 
   return (
     <button
       className={"ui toggle button " + (debugEnabled ? "active" : "")}
-      onClick={() => toggleDebugButton(props)}
+      onClick={() => setDebugEnabled(!debugEnabled)}
     >
       {debugMeta.title}
     </button>
   );
-};
-
-const toggleDebugButton = (props: IDebugProps) => {
-  props.debugEnabled ? props.DEBUG_OFF() : props.DEBUG_ON();
 };
 
 const mapStateToProps = ({ debug_unit }: { debug_unit: IDebugState }) => {
@@ -35,5 +37,5 @@ const mapStateToProps = ({ debug_unit }: { debug_unit: IDebugState }) => {
 
 export default connect(
   mapStateToProps,
-  DebugUnit.actions
+  DebugModule.actions
 )(DebugButton);
