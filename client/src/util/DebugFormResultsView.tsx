@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { FormSpy } from "react-final-form";
 import { connect } from "react-redux";
 
+//# Results view of the form
 class DebugFormResultsView extends Component<IDebugProps, any> {
   render() {
     return this.props.debugEnabled ? (
@@ -14,6 +15,7 @@ class DebugFormResultsView extends Component<IDebugProps, any> {
   }
 }
 
+//# Map store state to component props
 const mapStateToProps = ({ debug_module }: { debug_module: IDebugState }) => {
   return {
     hasPermission: debug_module.hasPermission,
@@ -21,7 +23,18 @@ const mapStateToProps = ({ debug_module }: { debug_module: IDebugState }) => {
   };
 };
 
+//# Map store dispatch to component props
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    DEBUG_OFF: (payload: any) =>
+      dispatch(DebugModule.actions.DEBUG_OFF(payload)),
+    DEBUG_ON: (payload: any) => dispatch(DebugModule.actions.DEBUG_ON(payload)),
+    SET_PERMISSION: (payload: any) =>
+      dispatch(DebugModule.actions.SET_PERMISSION(payload))
+  };
+};
+
 export default connect(
   mapStateToProps,
-  DebugModule.actions
+  mapDispatchToProps
 )(DebugFormResultsView);

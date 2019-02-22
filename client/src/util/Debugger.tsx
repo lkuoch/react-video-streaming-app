@@ -13,7 +13,7 @@ const DebugButton = (props: IDebugProps) => {
   //* Track locally whether or not the debug is on or off
   const [debugEnabled, setDebugEnabled] = useState(false);
 
-  //* Whenever, the local state is changed we will sync it with the global redux state
+  //* Whenever the local state is changed we will sync it with the global redux state
   useEffect(() => {
     debugEnabled ? props.DEBUG_ON() : props.DEBUG_OFF();
   }, [debugEnabled]);
@@ -28,6 +28,7 @@ const DebugButton = (props: IDebugProps) => {
   );
 };
 
+//# Map store state to component props
 const mapStateToProps = ({ debug_module }: { debug_module: IDebugState }) => {
   return {
     hasPermission: debug_module.hasPermission,
@@ -35,7 +36,18 @@ const mapStateToProps = ({ debug_module }: { debug_module: IDebugState }) => {
   };
 };
 
+//# Map store dispatch to component props
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    DEBUG_OFF: (payload: any) =>
+      dispatch(DebugModule.actions.DEBUG_OFF(payload)),
+    DEBUG_ON: (payload: any) => dispatch(DebugModule.actions.DEBUG_ON(payload)),
+    SET_PERMISSION: (payload: any) =>
+      dispatch(DebugModule.actions.SET_PERMISSION(payload))
+  };
+};
+
 export default connect(
   mapStateToProps,
-  DebugModule.actions
+  mapDispatchToProps
 )(DebugButton);

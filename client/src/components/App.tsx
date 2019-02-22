@@ -15,27 +15,21 @@ import StreamShow from "./streams/StreamShow";
 // Debug context
 const DebugContext = React.createContext(null);
 
-class App extends Component {
-  render() {
-    return (
-      <div className="ui container">
-        <BrowserRouter>
-          <React.Fragment>
-            <Header />
-            <Route exact path="/" component={StreamList} />
-            <Route
-              exact
-              path="/streams/new"
-              component={() => <StreamCreate />}
-            />
-            <Route exact path="/streams/edit" component={StreamEdit} />
-            <Route exact path="/streams/delete" component={StreamDelete} />
-            <Route exact path="/streams/show" component={StreamShow} />
-          </React.Fragment>
-        </BrowserRouter>
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div className="ui container">
+      <BrowserRouter>
+        <React.Fragment>
+          <Header />
+          <Route exact path="/" component={StreamList} />
+          <Route exact path="/streams/new" component={() => <StreamCreate />} />
+          <Route exact path="/streams/edit" component={StreamEdit} />
+          <Route exact path="/streams/delete" component={StreamDelete} />
+          <Route exact path="/streams/show" component={StreamShow} />
+        </React.Fragment>
+      </BrowserRouter>
+    </div>
+  );
+};
 
 export default App;

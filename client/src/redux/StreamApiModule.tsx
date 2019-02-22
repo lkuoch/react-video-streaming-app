@@ -5,14 +5,14 @@ import { PayloadAction, createSlice } from "redux-starter-kit";
 //# Debug Unit State Schema
 export interface IApiState {}
 
-//# ApiModule Available Props
+//# StreamApiModule Available Props
 export interface IApiProps extends IApiState {
   CREATE_STREAM: (action?: any) => void;
 }
 
-const ApiModule = createSlice({
+const StreamApiModule = createSlice({
   //~ Slice name
-  slice: "api_module",
+  slice: "stream_api_module",
 
   //~ Initial slice state
   initialState: {} as IApiState,
@@ -20,9 +20,9 @@ const ApiModule = createSlice({
   //~ Reducers
   reducers: {
     CREATE_STREAM: (state: IApiState, action: PayloadAction) => {
-      // TODO: Lesson 237-238, yeah boi
+      streams.post("/streams", action.payload);
     }
   }
 });
 
-export default ApiModule;
+export default StreamApiModule;

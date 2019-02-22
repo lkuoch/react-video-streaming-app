@@ -38,6 +38,7 @@ const RenderCounter = (props: IProps) => {
   return props.debugEnabled ? <Circle>{renders}</Circle> : null;
 };
 
+//# Map store state to component props
 const mapStateToProps = ({ debug_module }: { debug_module: IDebugState }) => {
   return {
     hasPermission: debug_module.hasPermission,
@@ -45,7 +46,18 @@ const mapStateToProps = ({ debug_module }: { debug_module: IDebugState }) => {
   };
 };
 
+//# Map store dispatch to component props
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    DEBUG_OFF: (payload: any) =>
+      dispatch(DebugModule.actions.DEBUG_OFF(payload)),
+    DEBUG_ON: (payload: any) => dispatch(DebugModule.actions.DEBUG_ON(payload)),
+    SET_PERMISSION: (payload: any) =>
+      dispatch(DebugModule.actions.SET_PERMISSION(payload))
+  };
+};
+
 export default connect(
   mapStateToProps,
-  DebugModule.actions
+  mapDispatchToProps
 )(RenderCounter);

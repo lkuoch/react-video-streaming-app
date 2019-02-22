@@ -21,9 +21,8 @@ const AuthModule = createSlice({
   //~ Initial slice state
   initialState: {
     isSignedIn: null,
-    signInStatus: null,
     userId: null,
-    gAPIAuthClient: null
+    gAPIAuthInstance: null
   } as IAuthState,
 
   //~ Reducers
