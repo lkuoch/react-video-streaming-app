@@ -27,14 +27,19 @@ const AuthModule = createSlice({
 
   //~ Reducers
   reducers: {
+    //* Set user status to signed in
     SIGN_IN: (state: IAuthState, _action: PayloadAction) => {
       state.isSignedIn = true;
       state.userId = state.gAPIAuthInstance!.currentUser.get().getId();
     },
+
+    //* Set user status to signed out
     SIGN_OUT: (state: IAuthState, _action: PayloadAction) => {
       state.isSignedIn = false;
       state.userId = null;
     },
+
+    //* Initialise a global instance of the Google API
     INIT_GAPI_INSTANCE: (state: IAuthState, action: PayloadAction) => {
       state.gAPIAuthInstance = action.payload;
     }

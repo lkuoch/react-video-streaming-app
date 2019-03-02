@@ -12,7 +12,7 @@ import StreamEdit from "./streams/StreamEdit";
 import StreamList from "./streams/StreamList";
 import StreamShow from "./streams/StreamShow";
 
-// Debug context
+//! TODO Pass Debug context to everything
 const DebugContext = React.createContext(null);
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
         <React.Fragment>
           <Header />
           <Route exact path="/" component={StreamList} />
-          <Route exact path="/streams/new" component={() => <StreamCreate />} />
+          <Route exact path="/streams/new" component={StreamCreate} />
           <Route exact path="/streams/edit" component={StreamEdit} />
           <Route exact path="/streams/delete" component={StreamDelete} />
           <Route exact path="/streams/show" component={StreamShow} />

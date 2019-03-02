@@ -2,8 +2,8 @@ import { Field, Form } from "react-final-form";
 
 import DebugFormResultsView from "../../util/DebugFormResultsView";
 import StreamApiModule, {
-  IApiProps,
-  IApiState
+  IStreamApiProps,
+  IStreamApiState
 } from "../../redux/StreamApiModule";
 import React, { useState, useEffect } from "react";
 import RenderCounter from "../../util/RenderCounter";
@@ -21,7 +21,7 @@ interface IFormValues {
 }
 
 //# Props available to component
-interface IProps extends IApiProps {}
+interface IProps extends IStreamApiProps {}
 
 //# Error values expected
 interface IError {

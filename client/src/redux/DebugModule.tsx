@@ -27,12 +27,17 @@ const DebugModule = createSlice({
 
   //~ Reducers
   reducers: {
+    //* Debug mode is on
     DEBUG_ON: (state: IDebugState, _action: PayloadAction) => {
       state.debugEnabled = true;
     },
+
+    //* Debug mode is off
     DEBUG_OFF: (state: IDebugState, _action: PayloadAction) => {
       state.debugEnabled = false;
     },
+
+    //* Sets whether or not the user has permission to access debug control
     SET_PERMISSION: (state: IDebugState, action: PayloadAction) => {
       state.hasPermission = action.payload;
     }
