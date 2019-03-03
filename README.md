@@ -3,4 +3,6 @@
 A video streaming app written in typescript
 
 To run:
-`npm install && npm start`
+
+- client: `cd client && npm install && npm start`
+- server: `cd server && npm install && npm start`

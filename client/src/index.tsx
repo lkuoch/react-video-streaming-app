@@ -1,6 +1,7 @@
 import App from "./components/App";
 import AuthModule from "./redux/AuthModule";
-import StreamApiModule from "./redux/StreamApiModule";
+// import StreamApiModule from "./redux/StreamApiModule";
+import { default as StreamApiReducer } from "./redux/StreamApiModule/Reducers";
 import DebugModule from "./redux/DebugModule";
 import { Provider } from "react-redux";
 import React from "react";
@@ -12,7 +13,9 @@ import thunk from "redux-thunk";
 //# Set up redux store
 const reducer = combineReducers({
   auth_module: AuthModule.reducer,
-  stream_api_module: StreamApiModule.reducer,
+  // RSK
+  // stream_api_module: StreamApiModule.reducer,
+  stream_api_module: StreamApiReducer,
   debug_module: DebugModule.reducer
 });
 

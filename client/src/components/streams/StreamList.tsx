@@ -1,43 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import StreamApiModule, {
-  IStreamApiProps,
-  IStreamApiState
-} from "../../redux/StreamApiModule";
+import { FETCH_STREAMS } from "../../redux/StreamApiModule/Actions";
 
-//# Prop interface for this component
-interface IProps extends IStreamApiProps {}
-
-class StreamList extends Component<IProps, {}> {
+class StreamList extends Component<any, {}> {
   componentDidMount() {
     this.props.FETCH_STREAMS();
-    console.log(this.props);
   }
 
   render() {
-    return <div>StreamList Works!</div>;
+    return <div>Stream List Works</div>;
   }
 }
 
-const mapStateToProps = ({
-  stream_api_module
-}: {
-  stream_api_module: IStreamApiState;
-}) => {
-  return {
-    streamList: stream_api_module.streamList
-  };
-};
-
-//# Map store dispatch to component props
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    FETCH_STREAMS: (payload: any) =>
-      dispatch(StreamApiModule.actions.FETCH_STREAMS(payload))
-  };
-};
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  null,
+  { FETCH_STREAMS }
 )(StreamList);
