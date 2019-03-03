@@ -4,11 +4,21 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 const Header = () => {
+  const showDebug = () => {
+    //! TODO: Hookup debug state and only show debug if user has permission
+    return <Debugger />;
+  };
+
   return (
     <div className="ui secondary pointing menu">
-      <Debugger />
+      {showDebug()}
       <div className="ui labeled button">
-        <Link to="/streams/new" className="ui red button">
+        <Link to="/" className="ui red button">
+          Streams
+        </Link>
+      </div>
+      <div className="ui labeled button">
+        <Link to="/streams/new" className="ui yellow button">
           Create Stream
         </Link>
       </div>

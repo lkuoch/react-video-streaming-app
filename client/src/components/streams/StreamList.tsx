@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FETCH_STREAMS } from "../../redux/StreamApiModule/Actions";
+import { FETCH_STREAMS } from "../../redux/StreamApiModule";
 
 class StreamList extends Component<any, {}> {
   componentDidMount() {
@@ -12,7 +12,15 @@ class StreamList extends Component<any, {}> {
   }
 }
 
+const mapStateToProps = null;
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    FETCH_STREAMS: () => dispatch(FETCH_STREAMS())
+  };
+};
+
 export default connect(
-  null,
-  { FETCH_STREAMS }
+  mapStateToProps,
+  mapDispatchToProps
 )(StreamList);

@@ -2,7 +2,11 @@ import { Field, Form } from "react-final-form";
 
 import DebugFormResultsView from "../../util/DebugFormResultsView";
 
-import { CREATE_STREAM } from "../../redux/StreamApiModule/Actions";
+import {
+  CREATE_STREAM,
+  IStreamApiProps,
+  IStreamApiState
+} from "../../redux/StreamApiModule";
 
 import React, { useState, useEffect } from "react";
 import RenderCounter from "../../util/RenderCounter";
@@ -20,7 +24,7 @@ interface IFormValues {
 }
 
 //# Props available to component
-// interface IProps extends IStreamApiProps {}
+interface IProps extends IStreamApiProps {}
 
 //# Error values expected
 interface IError {
@@ -33,8 +37,7 @@ const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 //# Callback when submitting form
 const onSubmit = (formValues: IFormValues, props: any) => {
-  // sleep(300);
-  // console.log(formValues, props, "form submitted");
+  sleep(300);
 
   // Submit
   props.CREATE_STREAM(formValues);
@@ -104,7 +107,7 @@ const renderField = ({ input, label, type, id, meta }: any) => {
 };
 
 //# Renders form
-const StreamCreate = (props: any) => {
+const StreamCreate = (props: IProps) => {
   return (
     <div className="CreateStreamForm">
       <Form
@@ -157,15 +160,13 @@ const StreamCreate = (props: any) => {
 const mapStateToProps = null;
 
 //# Map store dispatch to component props
-// const mapDispatchToProps = (dispatch: any) => {
-//   return {
-//     CREATE_STREAM: (payload: any) => dispatch(CreateStream(payload))
-//   };
-// };
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    CREATE_STREAM: (payload: any) => dispatch(CREATE_STREAM(payload))
+  };
+};
 
 export default connect(
   mapStateToProps,
-  {
-    CREATE_STREAM
-  }
+  mapDispatchToProps
 )(StreamCreate);

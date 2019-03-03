@@ -1,28 +1,28 @@
 import _ from "lodash";
-
 import {
-  _CREATE_STREAM,
-  _FETCH_STREAM,
-  _FETCH_STREAMS,
-  _EDIT_STREAM,
-  _DELETE_STREAM
+  create_stream,
+  fetch_stream,
+  fetch_streams,
+  edit_stream,
+  delete_stream
 } from "./Types";
 
+//* Execute Stream Api actions
 export default (state: any = {}, action: any) => {
   switch (action.type) {
-    case _FETCH_STREAM:
+    case fetch_stream:
       return { ...state, [action.payload.id]: action.payload };
 
-    case _FETCH_STREAMS:
+    case fetch_streams:
       return { ...state, ..._.mapKeys(action.payload, "id") };
 
-    case _CREATE_STREAM:
+    case create_stream:
       return { ...state, [action.payload.id]: action.payload };
 
-    case _EDIT_STREAM:
+    case edit_stream:
       return { ...state, [action.payload.id]: action.payload };
 
-    case _DELETE_STREAM:
+    case delete_stream:
       return _.omit(state, action.payload);
 
     default:
