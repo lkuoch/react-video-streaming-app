@@ -32,82 +32,69 @@ interface IError {
   long?: string;
 }
 
-//# Simulate processing - sleep for the desired amount of time in ms
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
-//# Callback when submitting form
-const onSubmit = (formValues: IFormValues, props: any) => {
-  sleep(300);
-
-  // Submit
-  props.CREATE_STREAM(formValues);
-};
-
-//# Combine validators
-const composeValidators = (...validators: any) => (value: any) =>
-  validators.reduce(
-    (error: any, validator: any) => error || validator(value),
-    undefined
-  );
-
-//# Msmoize utility function
-const simpleMemoize = (fn: Function) => {
-  let lastArg: any, lastResult: any;
-  return (arg: any) => {
-    if (arg !== lastArg) {
-      lastArg = arg;
-      lastResult = fn(arg);
-    }
-
-    return lastResult;
-  };
-};
-
-//# Renders form field error
-const renderError = ({ error, touched }: { error: IError; touched: any }) => {
-  return (
-    error &&
-    touched && (
-      <div className="ui error message">
-        <div className="header">{error.short}</div>
-        <p>{error.long}</p>
-      </div>
-    )
-  );
-};
-
-//# Renders form field
-const renderField = ({ input, label, type, id, meta }: any) => {
-  const className = `field ${meta.error && meta.touched ? "error" : ""}`;
-
-  //* Debug states
-  const [debugOn, setDebugOn] = useState(false);
-  const [debugEvent, setDebugEvent] = useState({});
-
-  //* Poll for global store setting the debugEnabled flag
-  useEffect(() => {
-    setDebugOn(store.getState().debug_module.debugEnabled);
-  }, [store.getState().debug_module.debugEnabled]);
-
-  //* Conditionally insert debug counter if applicable
-  let renderDebugCounter = debugOn ? (
-    <RenderCounter inputDebugEvent={debugEvent} />
-  ) : null;
-
-  return (
-    <div className={className} key={id}>
-      <label>{label}</label>
-      <div className="ui fluid input" onChange={e => setDebugEvent(e)}>
-        <input {...input} placeholder={label} type={type} />
-        {renderDebugCounter}
-      </div>
-      {renderError(meta)}
-    </div>
-  );
-};
-
 //# Renders form
 const StreamCreate = (props: IProps) => {
+  //# Renders form field
+  const renderField = ({ input, label, type, id, meta }: any) => {
+    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
+
+    //* Debug states
+    const [debugOn, setDebugOn] = useState(false);
+    const [debugEvent, setDebugEvent] = useState({});
+
+    //* Poll for global store setting the debugEnabled flag
+    useEffect(() => {
+      setDebugOn(store.getState().debug_module.debugEnabled);
+    }, [store.getState().debug_module.debugEnabled]);
+
+    //* Conditionally insert debug counter if applicable
+    let renderDebugCounter = debugOn ? (
+      <RenderCounter inputDebugEvent={debugEvent} />
+    ) : null;
+
+    return (
+      <div className={className} key={id}>
+        <label>{label}</label>
+        <div className="ui fluid input" onChange={e => setDebugEvent(e)}>
+          <input {...input} placeholder={label} type={type} />
+          {renderDebugCounter}
+        </div>
+        {renderError(meta)}
+      </div>
+    );
+  };
+
+  //# Renders form field error
+  const renderError = ({ error, touched }: { error: IError; touched: any }) => {
+    return (
+      error &&
+      touched && (
+        <div className="ui error message">
+          <div className="header">{error.short}</div>
+          <p>{error.long}</p>
+        </div>
+      )
+    );
+  };
+
+  //# Simulate processing - sleep for the desired amount of time in ms
+  const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  //# Callback when submitting form
+  const onSubmit = (formValues: IFormValues, props: any) => {
+    sleep(300);
+
+    // Submit
+    props.CREATE_STREAM(formValues);
+  };
+
+  //# Combine validators
+  const composeValidators = (...validators: any) => (value: any) =>
+    validators.reduce(
+      (error: any, validator: any) => error || validator(value),
+      undefined
+    );
+
   return (
     <div className="CreateStreamForm">
       <Form
