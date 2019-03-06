@@ -13,12 +13,12 @@ const Header = () => {
     <div className="ui secondary pointing menu">
       {showDebug()}
       <div className="ui labeled button">
-        <Link to="/" className="ui red button">
+        <Link to="/" className="ui teal button">
           Streams
         </Link>
       </div>
       <div className="ui labeled button">
-        <Link to="/streams/new" className="ui yellow button">
+        <Link to="/streams/new" className="ui primary button">
           Create Stream
         </Link>
       </div>

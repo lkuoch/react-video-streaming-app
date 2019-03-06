@@ -79,7 +79,7 @@ const mapStateToProps = ({ auth_module }: { auth_module: IAuthState }) => {
 };
 
 //# Map store dispatch to component props
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Function) => {
   return {
     SIGN_IN: (payload: any) => dispatch(AuthModule.actions.SIGN_IN(payload)),
     SIGN_OUT: (payload: any) => dispatch(AuthModule.actions.SIGN_OUT(payload)),

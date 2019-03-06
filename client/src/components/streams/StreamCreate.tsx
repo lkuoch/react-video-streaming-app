@@ -147,7 +147,7 @@ const StreamCreate = (props: IProps) => {
 const mapStateToProps = null;
 
 //# Map store dispatch to component props
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Function) => {
   return {
     CREATE_STREAM: (payload: any) => dispatch(CREATE_STREAM(payload))
   };

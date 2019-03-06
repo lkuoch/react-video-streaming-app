@@ -1,39 +1,20 @@
 {
   "streams": [
     {
-      "title": "sleep for the desired amount of time in ms",
-      "description": "sleep for the desired amount of time in ms",
+      "title": "Can you help me",
+      "description": "It's over Anakin! I have the high ground",
       "id": 1
     },
     {
-      "title": "// return async (dispatch: any) => {",
-      "description": "// return async (dispatch: any) => {",
+      "title": "Super Smash Bros Ultimate Stream",
+      "description": "The Legend of Zelda, Breath of the Wild!",
       "id": 2
     },
     {
-      "title": "A fantastic stream",
-      "description": "By yours truly xD",
+      "title": "This is a new stream",
+      "description": "Hopefully it should have a id associated with it",
+      "userId": "103496747261077486849",
       "id": 3
-    },
-    {
-      "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "id": 4
-    },
-    {
-      "title": "it was the age of wisdom, it was the age of foolishness,",
-      "description": "It was the best of times, it was the worst of times,",
-      "id": 5
-    },
-    {
-      "title": "ABCDE",
-      "description": "ALALALALLALALALAAL",
-      "id": 6
-    },
-    {
-      "title": "I have a car",
-      "description": "Do you know that?",
-      "id": 7
     }
   ]
 }

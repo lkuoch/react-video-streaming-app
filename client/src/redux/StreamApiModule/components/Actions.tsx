@@ -8,8 +8,15 @@ import {
 } from "./Types";
 
 //* Creates a stream
-export const CREATE_STREAM = (formValues: any) => async (dispatch: any) => {
-  const response = await Endpoint.post("/streams", formValues);
+export const CREATE_STREAM = (formValues: any) => async (
+  dispatch: Function,
+  getState: Function
+) => {
+  const { userId } = getState().auth_module;
+  const response = await Endpoint.post("/streams", {
+    ...formValues,
+    userId
+  });
 
   dispatch({
     type: create_stream,
@@ -18,7 +25,7 @@ export const CREATE_STREAM = (formValues: any) => async (dispatch: any) => {
 };
 
 //* Fetches a single stream
-export const FETCH_STREAM = (id: Number) => async (dispatch: any) => {
+export const FETCH_STREAM = (id: Number) => async (dispatch: Function) => {
   const response = await Endpoint.get(`/streams/${id}`);
 
   dispatch({
@@ -28,7 +35,7 @@ export const FETCH_STREAM = (id: Number) => async (dispatch: any) => {
 };
 
 //* Fetches all streams
-export const FETCH_STREAMS = () => async (dispatch: any) => {
+export const FETCH_STREAMS = () => async (dispatch: Function) => {
   const response = await Endpoint.get("/streams");
 
   dispatch({
@@ -39,7 +46,7 @@ export const FETCH_STREAMS = () => async (dispatch: any) => {
 
 //* Edit a single stream
 export const EDIT_STREAM = (id: Number, formValues: any) => async (
-  dispatch: any
+  dispatch: Function
 ) => {
   const response = await Endpoint.put(`/streams/${id}`, formValues);
 
@@ -50,7 +57,7 @@ export const EDIT_STREAM = (id: Number, formValues: any) => async (
 };
 
 //* Delete a single stream
-export const DELETE_STREAM = (id: Number) => async (dispatch: any) => {
+export const DELETE_STREAM = (id: Number) => async (dispatch: Function) => {
   await Endpoint.delete(`/streams/${id}`);
 
   dispatch({

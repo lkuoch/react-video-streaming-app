@@ -47,7 +47,7 @@ const mapStateToProps = ({ debug_module }: { debug_module: IDebugState }) => {
 };
 
 //# Map store dispatch to component props
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Function) => {
   return {
     DEBUG_OFF: (payload: any) =>
       dispatch(DebugModule.actions.DEBUG_OFF(payload)),
