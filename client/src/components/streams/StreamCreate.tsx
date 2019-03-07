@@ -6,7 +6,7 @@ import {
   CREATE_STREAM,
   IStreamApiProps,
   IStreamApiState
-} from "../../redux/StreamApiModule";
+} from "../../redux/StreamApiStore";
 
 import React, { useState, useEffect } from "react";
 import RenderCounter from "../../util/RenderCounter";
@@ -43,9 +43,9 @@ const StreamCreate = (props: IProps) => {
     const [debugEvent, setDebugEvent] = useState({});
 
     //* Poll for global store setting the debugEnabled flag
-    useEffect(() => {
-      setDebugOn(store.getState().debug_module.debugEnabled);
-    }, [store.getState().debug_module.debugEnabled]);
+    // useEffect(() => {
+    //   setDebugOn(store.getState().debug_store.debugEnabled);
+    // }, [store.getState().debug_store.debugEnabled]);
 
     //* Conditionally insert debug counter if applicable
     let renderDebugCounter = debugOn ? (

@@ -1,4 +1,4 @@
-import DebugModule, { IDebugProps, IDebugState } from "../redux/DebugModule";
+import DebugStore, { IDebugProps, IDebugState } from "../redux/DebugStore";
 import React, { Component } from "react";
 
 import { FormSpy } from "react-final-form";
@@ -14,10 +14,10 @@ const DebugFormResultsView = (props: IDebugProps) => {
 };
 
 //# Map store state to component props
-const mapStateToProps = ({ debug_module }: { debug_module: IDebugState }) => {
+const mapStateToProps = ({ debug_store }: { debug_store: IDebugState }) => {
   return {
-    hasPermission: debug_module.hasPermission,
-    debugEnabled: debug_module.debugEnabled
+    hasPermission: debug_store.hasPermission,
+    debugEnabled: debug_store.debugEnabled
   };
 };
 
@@ -25,10 +25,10 @@ const mapStateToProps = ({ debug_module }: { debug_module: IDebugState }) => {
 const mapDispatchToProps = (dispatch: Function) => {
   return {
     DEBUG_OFF: (payload: any) =>
-      dispatch(DebugModule.actions.DEBUG_OFF(payload)),
-    DEBUG_ON: (payload: any) => dispatch(DebugModule.actions.DEBUG_ON(payload)),
+      dispatch(DebugStore.actions.DEBUG_OFF(payload)),
+    DEBUG_ON: (payload: any) => dispatch(DebugStore.actions.DEBUG_ON(payload)),
     SET_PERMISSION: (payload: any) =>
-      dispatch(DebugModule.actions.SET_PERMISSION(payload))
+      dispatch(DebugStore.actions.SET_PERMISSION(payload))
   };
 };
 

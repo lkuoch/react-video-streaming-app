@@ -5,7 +5,7 @@ import {
   FETCH_STREAMS,
   IStreamApiProps,
   IStreamApiState
-} from "../../redux/StreamApiModule";
+} from "../../redux/StreamApiStore";
 
 //# Redux store state available
 interface IStoreState {
@@ -85,9 +85,9 @@ const StreamList = (props: IProps) => {
 const mapStateToProps = (state: any): IStoreState => {
   return {
     //* Turn stream object into array
-    streams: Object.values(state.stream_api_module),
-    currentUserId: state.auth_module.userId,
-    isSignedIn: state.auth_module.isSignedIn
+    streams: Object.values(state.stream_api_store),
+    currentUserId: state.auth_store.userId,
+    isSignedIn: state.auth_store.isSignedIn
   };
 };
 

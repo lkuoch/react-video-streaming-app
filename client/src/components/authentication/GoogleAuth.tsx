@@ -1,13 +1,11 @@
-import AuthModule, { IAuthProps, IAuthState } from "../../redux/AuthModule";
-import React, { Component, useEffect } from "react";
+import AuthStore, { IAuthReducers, IAuthState } from "../../redux/AuthStore";
+import React, { Component } from "react";
 
 import Config from "../../configs/Config";
 import { connect } from "react-redux";
 
-import { store } from "../../index";
-
 //# Prop interface for this component
-interface IProps extends IAuthProps {}
+interface IProps extends IAuthReducers, IAuthState {}
 
 class GoogleAuth extends Component<IProps, {}> {
   componentDidMount() {
@@ -70,21 +68,22 @@ class GoogleAuth extends Component<IProps, {}> {
 }
 
 //# Map store state to component props
-const mapStateToProps = ({ auth_module }: { auth_module: IAuthState }) => {
+const mapStateToProps = ({ auth_store }: { auth_store: IAuthState }) => {
   return {
-    isSignedIn: auth_module.isSignedIn,
-    userId: auth_module.userId,
-    gAPIAuthInstance: auth_module.gAPIAuthInstance
+    isSignedIn: auth_store.isSignedIn,
+    userId: auth_store.userId,
+    gAPIAuthInstance: auth_store.gAPIAuthInstance
   };
 };
 
 //# Map store dispatch to component props
-const mapDispatchToProps = (dispatch: Function) => {
+const mapDispatchToProps = (dispatch: Function): IAuthReducers => {
   return {
-    SIGN_IN: (payload: any) => dispatch(AuthModule.actions.SIGN_IN(payload)),
-    SIGN_OUT: (payload: any) => dispatch(AuthModule.actions.SIGN_OUT(payload)),
+    SIGN_IN: (payload: any) => dispatch(AuthStore.actions.SIGN_IN(payload)),
+    SIGN_OUT: (payload: any) => dispatch(AuthStore.actions.SIGN_OUT(payload)),
+
     INIT_GAPI_INSTANCE: (payload: any) =>
-      dispatch(AuthModule.actions.INIT_GAPI_INSTANCE(payload))
+      dispatch(AuthStore.actions.INIT_GAPI_INSTANCE(payload))
   };
 };
 

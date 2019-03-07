@@ -12,7 +12,7 @@ export const CREATE_STREAM = (formValues: any) => async (
   dispatch: Function,
   getState: Function
 ) => {
-  const { userId } = getState().auth_module;
+  const { userId } = getState().auth_store;
   const response = await Endpoint.post("/streams", {
     ...formValues,
     userId
