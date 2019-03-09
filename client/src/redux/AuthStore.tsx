@@ -9,9 +9,9 @@ export interface IAuthState {
 
 //# AuthStore Availabe Prop Methods
 export interface IAuthReducers {
-  SIGN_IN: (action?: any) => void;
-  SIGN_OUT: (action?: any) => void;
-  INIT_GAPI_INSTANCE: (action?: gapi.auth2.GoogleAuth) => void;
+  SIGN_IN: (payload?: any) => void;
+  SIGN_OUT: (payload?: any) => void;
+  INIT_GAPI_INSTANCE: (payload?: gapi.auth2.GoogleAuth) => void;
 }
 
 const AuthStore = createSlice({

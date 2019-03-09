@@ -7,7 +7,7 @@ import DebugFormResultsView from "../../util/DebugFormResultsView";
 import RenderCounter from "../../util/RenderCounter";
 
 //# Form values expected on submit
-interface IFormValues {
+export interface IFormValues {
   title?: string;
   description?: string;
 }
@@ -22,7 +22,7 @@ interface IError {
 }
 
 //# Renders form
-function StreamForm(props: IProps) {
+function StreamForm(props: any) {
   //# Renders form field
   const renderField = ({ input, label, type, id, meta }: any) => {
     const className = `field ${meta.error && meta.touched ? "error" : ""}`;
@@ -70,7 +70,7 @@ function StreamForm(props: IProps) {
   const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
   //# Callback when submitting form
-  const onSubmit = (formValues: IFormValues, props: any) => {
+  const onSubmit = (formValues: IFormValues) => {
     sleep(300);
 
     // Expect a callback
@@ -85,10 +85,11 @@ function StreamForm(props: IProps) {
     );
 
   return (
-    <div className="CreateStreamForm">
+    <div className="StreamForm">
       <Form
         subscription={{ submitting: true, pristine: true }}
-        onSubmit={val => onSubmit(val, props)}
+        onSubmit={val => onSubmit(val)}
+        initialValues={props.initialValues}
         render={({ handleSubmit, reset, submitting, pristine, values }) => (
           <form className="ui error form" onSubmit={handleSubmit}>
             <Field

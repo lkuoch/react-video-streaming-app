@@ -8,9 +8,9 @@ export interface IStreamApiState {
 }
 
 export interface IStreamApiProps {
-  CREATE_STREAM: (action?: any) => void;
-  FETCH_STREAM: (action?: any) => void;
-  FETCH_STREAMS: (action?: any) => void;
-  EDIT_STREAM: (action?: any) => void;
-  DELETE_STREAM: (action?: any) => void;
+  CREATE_STREAM: (payload?: any) => void;
+  FETCH_STREAM: (payload?: any) => void;
+  FETCH_STREAMS: (payload?: any) => void;
+  EDIT_STREAM: (payload?: any) => void;
+  DELETE_STREAM: (payload?: any) => void;
 }

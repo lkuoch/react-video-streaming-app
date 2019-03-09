@@ -49,19 +49,24 @@ export const FETCH_STREAMS = () => async (dispatch: Function) => {
 };
 
 //* Edit a single stream
-export const EDIT_STREAM = (id: Number, formValues: any) => async (
-  dispatch: Function
-) => {
-  const response = await Endpoint.put(`/streams/${id}`, formValues);
+export const EDIT_STREAM = (payload: any) => async (dispatch: Function) => {
+  //~ Merge changes
+  const response = await Endpoint.patch(
+    `/streams/${payload.id}`,
+    payload.formValues
+  );
 
   dispatch({
     type: edit_stream,
     payload: response.data
   });
+
+  //~ Navigate back to home page
+  History.push("/");
 };
 
 //* Delete a single stream
-export const DELETE_STREAM = (id: Number) => async (dispatch: Function) => {
+export const DELETE_STREAM = (id: number) => async (dispatch: Function) => {
   await Endpoint.delete(`/streams/${id}`);
 
   dispatch({

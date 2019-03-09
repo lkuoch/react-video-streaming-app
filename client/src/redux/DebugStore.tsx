@@ -10,9 +10,9 @@ export interface IDebugState {
 
 //# DebugStore Available Prop Methods
 export interface IDebugProps extends IDebugState {
-  SET_PERMISSION: (action?: any) => void;
-  DEBUG_ON: (action?: any) => void;
-  DEBUG_OFF: (action?: any) => void;
+  SET_PERMISSION: (payload?: any) => void;
+  DEBUG_ON: (payload?: any) => void;
+  DEBUG_OFF: (payload?: any) => void;
 }
 
 const DebugStore = createSlice({
