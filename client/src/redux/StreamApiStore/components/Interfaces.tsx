@@ -7,7 +7,7 @@ export interface IStreamApiState {
   id: number;
 }
 
-export interface IStreamApiProps extends IStreamApiState {
+export interface IStreamApiProps {
   CREATE_STREAM: (action?: any) => void;
   FETCH_STREAM: (action?: any) => void;
   FETCH_STREAMS: (action?: any) => void;

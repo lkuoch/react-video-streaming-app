@@ -30,7 +30,7 @@ const AuthStore = createSlice({
     //* Set user status to signed in
     SIGN_IN: (state: IAuthState, action: PayloadAction) => {
       state.isSignedIn = true;
-      state.userId = action.payload;
+      state.userId = state.gAPIAuthInstance!.currentUser.get().getId();
     },
 
     //* Set user status to signed out

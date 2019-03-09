@@ -6,6 +6,7 @@ import {
   edit_stream,
   delete_stream
 } from "./Types";
+import History from "../../../browser/History";
 
 //* Creates a stream
 export const CREATE_STREAM = (formValues: any) => async (
@@ -22,6 +23,9 @@ export const CREATE_STREAM = (formValues: any) => async (
     type: create_stream,
     payload: response.data
   });
+
+  //~ Navigate back to home page
+  History.push("/");
 };
 
 //* Fetches a single stream

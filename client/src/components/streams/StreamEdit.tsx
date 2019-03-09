@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 
-class StreamEdit extends Component {
-  render() {
-    return <div>StreamEdit Works!</div>;
-  }
-}
+const StreamEdit = (props: any) => {
+  console.log(props);
+  return <div>Stream Edit Works!</div>;
+};
 
 export default StreamEdit;

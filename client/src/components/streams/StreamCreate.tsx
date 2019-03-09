@@ -1,21 +1,15 @@
 import { Field, Form } from "react-final-form";
-
-import DebugFormResultsView from "../../util/DebugFormResultsView";
-
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { store } from "../../index";
 import {
   CREATE_STREAM,
   IStreamApiProps,
   IStreamApiState
 } from "../../redux/StreamApiStore";
-
-import React, { useState, useEffect } from "react";
-import RenderCounter from "../../util/RenderCounter";
-
 import { GeneralValidators as GV } from "../form_validators/GeneralValidators";
-
-import { connect } from "react-redux";
-
-import { store } from "../../index";
+import DebugFormResultsView from "../../util/DebugFormResultsView";
+import RenderCounter from "../../util/RenderCounter";
 
 //# Form values expected on submit
 interface IFormValues {
@@ -24,7 +18,7 @@ interface IFormValues {
 }
 
 //# Props available to component
-interface IProps extends IStreamApiProps {}
+interface IProps extends IStreamApiProps, IStreamApiState {}
 
 //# Error values expected
 interface IError {
@@ -43,9 +37,9 @@ const StreamCreate = (props: IProps) => {
     const [debugEvent, setDebugEvent] = useState({});
 
     //* Poll for global store setting the debugEnabled flag
-    // useEffect(() => {
-    //   setDebugOn(store.getState().debug_store.debugEnabled);
-    // }, [store.getState().debug_store.debugEnabled]);
+    useEffect(() => {
+      setDebugOn(store.getState().debug_store.debugEnabled);
+    }, [store.getState().debug_store.debugEnabled]);
 
     //* Conditionally insert debug counter if applicable
     let renderDebugCounter = debugOn ? (

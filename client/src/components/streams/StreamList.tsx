@@ -30,8 +30,13 @@ const StreamList = (props: IProps) => {
     if (stream.userId === props.currentUserId) {
       return (
         <div className="right floated content">
-          <button className="ui button standard">Edit</button>
-          <button className="ui button negative">Delete</button>
+          <button className="ui button basic red">Delete</button>
+          <Link
+            className="ui button basic teal"
+            to={`/streams/edit/${stream.id}`}
+          >
+            Edit
+          </Link>
         </div>
       );
     }
