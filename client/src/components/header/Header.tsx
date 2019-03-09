@@ -3,7 +3,7 @@ import GoogleAuth from "../authentication/GoogleAuth";
 import { Link } from "react-router-dom";
 import React from "react";
 
-const Header = () => {
+function Header() {
   const showDebug = () => {
     //! TODO: Hookup debug state and only show debug if user has permission
     return <Debugger />;
@@ -30,6 +30,6 @@ const Header = () => {
       <GoogleAuth />
     </div>
   );
-};
+}
 
 export default Header;

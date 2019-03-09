@@ -5,24 +5,24 @@ import { FormSpy } from "react-final-form";
 import { connect } from "react-redux";
 
 //# Results view of the form
-const DebugFormResultsView = (props: IDebugProps) => {
+function DebugFormResultsView(props: IDebugProps) {
   return props.debugEnabled ? (
     <FormSpy subscription={{ values: true }}>
       {({ values }) => <pre>{JSON.stringify(values, undefined, 2)}</pre>}
     </FormSpy>
   ) : null;
-};
+}
 
 //# Map store state to component props
-const mapStateToProps = ({ debug_store }: { debug_store: IDebugState }) => {
+function mapStateToProps({ debug_store }: { debug_store: IDebugState }) {
   return {
     hasPermission: debug_store.hasPermission,
     debugEnabled: debug_store.debugEnabled
   };
-};
+}
 
 //# Map store dispatch to component props
-const mapDispatchToProps = (dispatch: Function) => {
+function mapDispatchToProps(dispatch: Function) {
   return {
     DEBUG_OFF: (payload: any) =>
       dispatch(DebugStore.actions.DEBUG_OFF(payload)),
@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch: Function) => {
     SET_PERMISSION: (payload: any) =>
       dispatch(DebugStore.actions.SET_PERMISSION(payload))
   };
-};
+}
 
 export default connect(
   mapStateToProps,

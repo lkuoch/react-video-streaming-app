@@ -16,7 +16,7 @@ import History from "../browser/History";
 //! TODO Pass Debug context to everything
 const DebugContext = React.createContext(null);
 
-const App = () => {
+function App() {
   return (
     <div className="ui container">
       <Router history={History}>
@@ -31,6 +31,6 @@ const App = () => {
       </Router>
     </div>
   );
-};
+}
 
 export default App;

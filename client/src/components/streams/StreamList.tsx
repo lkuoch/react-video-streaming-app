@@ -8,17 +8,17 @@ import {
 } from "../../redux/StreamApiStore";
 
 //# Redux store state available
-interface IStoreState {
-  streams: any;
+interface IStreamListState {
+  streams: IStreamApiState[];
   currentUserId: string;
   isSignedIn: boolean;
 }
 
 //# Props available to component
-interface IProps extends IStoreState, IStreamApiProps {}
+interface IProps extends IStreamListState, IStreamApiProps {}
 
 //# Render stream list
-const StreamList = (props: IProps) => {
+function StreamList(props: IProps) {
   //* On mount
   useEffect(() => {
     props.FETCH_STREAMS();
@@ -84,24 +84,24 @@ const StreamList = (props: IProps) => {
       {renderCreateStream()}
     </>
   );
-};
+}
 
 //# Map store state to component props
-const mapStateToProps = (state: any): IStoreState => {
+function mapStateToProps(state: any): IStreamListState {
   return {
     //* Turn stream object into array
     streams: Object.values(state.stream_api_store),
     currentUserId: state.auth_store.userId,
     isSignedIn: state.auth_store.isSignedIn
   };
-};
+}
 
 //# Map store dispatch to component props
-const mapDispatchToProps = (dispatch: Function) => {
+function mapDispatchToProps(dispatch: Function) {
   return {
     FETCH_STREAMS: () => dispatch(FETCH_STREAMS())
   };
-};
+}
 
 export default connect(
   mapStateToProps,

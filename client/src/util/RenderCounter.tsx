@@ -26,7 +26,7 @@ interface IProps extends IDebugProps {
   inputDebugEvent: Object;
 }
 
-const RenderCounter = (props: IProps) => {
+function RenderCounter(props: IProps) {
   //* Local render count
   const [renders, setRenders] = useState(0);
 
@@ -36,18 +36,18 @@ const RenderCounter = (props: IProps) => {
   }, [props.inputDebugEvent]);
 
   return props.debugEnabled ? <Circle>{renders}</Circle> : null;
-};
+}
 
 //# Map store state to component props
-const mapStateToProps = ({ debug_store }: { debug_store: IDebugState }) => {
+function mapStateToProps({ debug_store }: { debug_store: IDebugState }) {
   return {
     hasPermission: debug_store.hasPermission,
     debugEnabled: debug_store.debugEnabled
   };
-};
+}
 
 //# Map store dispatch to component props
-const mapDispatchToProps = (dispatch: Function) => {
+function mapDispatchToProps(dispatch: Function) {
   return {
     DEBUG_OFF: (payload: any) =>
       dispatch(DebugStore.actions.DEBUG_OFF(payload)),
@@ -55,7 +55,7 @@ const mapDispatchToProps = (dispatch: Function) => {
     SET_PERMISSION: (payload: any) =>
       dispatch(DebugStore.actions.SET_PERMISSION(payload))
   };
-};
+}
 
 export default connect(
   mapStateToProps,

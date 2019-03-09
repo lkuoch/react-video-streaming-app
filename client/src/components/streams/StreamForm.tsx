@@ -1,12 +1,7 @@
 import { Field, Form } from "react-final-form";
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
 import { store } from "../../index";
-import {
-  CREATE_STREAM,
-  IStreamApiProps,
-  IStreamApiState
-} from "../../redux/StreamApiStore";
+import { IStreamApiProps, IStreamApiState } from "../../redux/StreamApiStore";
 import { GeneralValidators as GV } from "../form_validators/GeneralValidators";
 import DebugFormResultsView from "../../util/DebugFormResultsView";
 import RenderCounter from "../../util/RenderCounter";
@@ -27,7 +22,7 @@ interface IError {
 }
 
 //# Renders form
-function StreamCreate(props: IProps) {
+function StreamForm(props: IProps) {
   //# Renders form field
   const renderField = ({ input, label, type, id, meta }: any) => {
     const className = `field ${meta.error && meta.touched ? "error" : ""}`;
@@ -78,8 +73,8 @@ function StreamCreate(props: IProps) {
   const onSubmit = (formValues: IFormValues, props: any) => {
     sleep(300);
 
-    // Submit
-    props.CREATE_STREAM(formValues);
+    // Expect a callback
+    props.onSubmit(formValues);
   };
 
   //# Combine validators
@@ -137,19 +132,4 @@ function StreamCreate(props: IProps) {
   );
 }
 
-//# Map store state to component props
-function mapStateToProps() {
-  return null;
-}
-
-//# Map store dispatch to component props
-function mapDispatchToProps(dispatch: Function) {
-  return {
-    CREATE_STREAM: (payload: any) => dispatch(CREATE_STREAM(payload))
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(StreamCreate);
+export default StreamForm;

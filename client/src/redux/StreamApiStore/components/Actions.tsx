@@ -29,7 +29,7 @@ export const CREATE_STREAM = (formValues: any) => async (
 };
 
 //* Fetches a single stream
-export const FETCH_STREAM = (id: Number) => async (dispatch: Function) => {
+export const FETCH_STREAM = (id: number) => async (dispatch: Function) => {
   const response = await Endpoint.get(`/streams/${id}`);
 
   dispatch({
