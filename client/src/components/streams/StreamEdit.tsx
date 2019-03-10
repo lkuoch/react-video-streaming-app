@@ -53,14 +53,12 @@ function StreamEdit(props: IProps) {
   return <>{render()}</>;
 }
 
-//# Map store state to component props
 function mapStateToProps(state: any, ownProps: any): IStreamEditState {
   return {
     stream: state.stream_api_store[ownProps.match.params.id]
   };
 }
 
-//# Map store dispatch to component props
 function mapDispatchToProps(dispatch: Function) {
   return {
     FETCH_STREAM: (payload: number) => dispatch(FETCH_STREAM(payload)),

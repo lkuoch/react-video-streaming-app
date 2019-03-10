@@ -7,17 +7,14 @@ import {
   IStreamApiState
 } from "../../redux/StreamApiStore";
 
-//# Redux store state available
 interface IStreamListState {
   streams: IStreamApiState[];
   currentUserId: string;
   isSignedIn: boolean;
 }
 
-//# Props available to component
 interface IProps extends IStreamListState, IStreamApiProps {}
 
-//# Render stream list
 function StreamList(props: IProps) {
   //* On mount
   useEffect(() => {
@@ -30,10 +27,15 @@ function StreamList(props: IProps) {
     if (stream.userId === props.currentUserId) {
       return (
         <div className="right floated content">
-          <button className="ui button basic red">Delete</button>
           <Link
-            className="ui button basic teal"
+            to={`/streams/delete/${stream.id}`}
+            className="ui button inverted red"
+          >
+            Delete
+          </Link>
+          <Link
             to={`/streams/edit/${stream.id}`}
+            className="ui button inverted violet"
           >
             Edit
           </Link>
@@ -41,7 +43,6 @@ function StreamList(props: IProps) {
       );
     }
 
-    //~ Default
     return null;
   };
 
@@ -57,7 +58,6 @@ function StreamList(props: IProps) {
       );
     }
 
-    //~ Default
     return null;
   };
 
@@ -86,7 +86,6 @@ function StreamList(props: IProps) {
   );
 }
 
-//# Map store state to component props
 function mapStateToProps(state: any): IStreamListState {
   return {
     //* Turn stream object into array
@@ -96,7 +95,6 @@ function mapStateToProps(state: any): IStreamListState {
   };
 }
 
-//# Map store dispatch to component props
 function mapDispatchToProps(dispatch: Function) {
   return {
     FETCH_STREAMS: () => dispatch(FETCH_STREAMS())

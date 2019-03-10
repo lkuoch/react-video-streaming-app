@@ -73,4 +73,7 @@ export const DELETE_STREAM = (id: number) => async (dispatch: Function) => {
     type: delete_stream,
     payload: id
   });
+
+  //~ Navigate back to home page
+  History.push("/");
 };
