@@ -1,14 +1,14 @@
 {
-  "name": "server",
+  "name": "rtmpserver",
   "version": "1.0.0",
-  "description": "Server",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "json-server -p 3001 -w db.json"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "json-server": "^0.14.2"
+    "node-media-server": "^1.4.12"
   }
 }

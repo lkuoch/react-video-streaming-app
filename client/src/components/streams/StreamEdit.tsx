@@ -53,7 +53,7 @@ function StreamEdit(props: IProps) {
   return <>{render()}</>;
 }
 
-function mapStateToProps(state: any, ownProps: any): IStreamEditState {
+function mapStateToProps(state: any, ownProps: any) {
   return {
     stream: state.stream_api_store[ownProps.match.params.id]
   };

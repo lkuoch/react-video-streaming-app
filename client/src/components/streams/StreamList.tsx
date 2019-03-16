@@ -69,7 +69,9 @@ function StreamList(props: IProps) {
           {renderAdmin(stream)}
           <i className="large middle aligned icon camera" />
           <div className="content">
-            {stream.title}
+            <Link className="header" to={`/streams/${stream.id}`}>
+              {stream.title}
+            </Link>
             <div className="description">{stream.description}</div>
           </div>
         </div>
@@ -88,7 +90,7 @@ function StreamList(props: IProps) {
 
 function mapStateToProps(state: any): IStreamListState {
   return {
-    //* Turn stream object into array
+    //~ Turn stream object into array
     streams: Object.values(state.stream_api_store),
     currentUserId: state.auth_store.userId,
     isSignedIn: state.auth_store.isSignedIn

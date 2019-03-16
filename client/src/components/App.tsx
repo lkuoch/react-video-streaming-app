@@ -2,7 +2,7 @@
 
 import "semantic-ui-css/semantic.min.css";
 
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import React from "react";
 
 import Header from "./header/Header";
@@ -22,11 +22,13 @@ function App() {
       <Router history={History}>
         <React.Fragment>
           <Header />
-          <Route exact path="/" component={StreamList} />
-          <Route exact path="/streams/new" component={StreamCreate} />
-          <Route exact path="/streams/edit/:id" component={StreamEdit} />
-          <Route exact path="/streams/delete/:id" component={StreamDelete} />
-          <Route exact path="/streams/show" component={StreamShow} />
+          <Switch>
+            <Route exact path="/" component={StreamList} />
+            <Route exact path="/streams/new" component={StreamCreate} />
+            <Route exact path="/streams/edit/:id" component={StreamEdit} />
+            <Route exact path="/streams/delete/:id" component={StreamDelete} />
+            <Route exact path="/streams/:id" component={StreamShow} />
+          </Switch>
         </React.Fragment>
       </Router>
     </div>
