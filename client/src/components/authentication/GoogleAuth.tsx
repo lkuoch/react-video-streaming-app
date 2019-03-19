@@ -1,13 +1,10 @@
-import AuthStore, { IAuthReducers, IAuthState } from "../../redux/AuthStore";
+import AuthStore from "../../redux/AuthStore";
 import React, { Component } from "react";
 
 import Config from "../../configs/Config";
 import { connect } from "react-redux";
 
-//# Prop interface for this component
-interface IProps extends IAuthReducers, IAuthState {}
-
-class GoogleAuth extends Component<IProps, {}> {
+class GoogleAuth extends Component<RVSA.IGoogleAuthProps, {}> {
   componentDidMount() {
     gapi.load("client:auth2", () => {
       gapi.auth2
@@ -68,7 +65,11 @@ class GoogleAuth extends Component<IProps, {}> {
 }
 
 //# Map store state to component props
-const mapStateToProps = ({ auth_store }: { auth_store: IAuthState }) => {
+const mapStateToProps = ({
+  auth_store
+}: {
+  auth_store: RVSA.IAuthStoreState;
+}) => {
   return {
     isSignedIn: auth_store.isSignedIn,
     userId: auth_store.userId,
@@ -77,11 +78,10 @@ const mapStateToProps = ({ auth_store }: { auth_store: IAuthState }) => {
 };
 
 //# Map store dispatch to component props
-const mapDispatchToProps = (dispatch: Function): IAuthReducers => {
+const mapDispatchToProps = (dispatch: Function): RVSA.IAuthStoreReducers => {
   return {
-    SIGN_IN: (payload: any) => dispatch(AuthStore.actions.SIGN_IN(payload)),
-    SIGN_OUT: (payload: any) => dispatch(AuthStore.actions.SIGN_OUT(payload)),
-
+    SIGN_IN: () => dispatch(AuthStore.actions.SIGN_IN()),
+    SIGN_OUT: () => dispatch(AuthStore.actions.SIGN_OUT()),
     INIT_GAPI_INSTANCE: (payload: any) =>
       dispatch(AuthStore.actions.INIT_GAPI_INSTANCE(payload))
   };

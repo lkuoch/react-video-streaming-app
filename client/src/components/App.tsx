@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="ui container">
       <Router history={History}>
-        <React.Fragment>
+        <>
           <Header />
           <Switch>
             <Route exact path="/" component={StreamList} />
@@ -29,7 +29,7 @@ function App() {
             <Route exact path="/streams/delete/:id" component={StreamDelete} />
             <Route exact path="/streams/:id" component={StreamShow} />
           </Switch>
-        </React.Fragment>
+        </>
       </Router>
     </div>
   );

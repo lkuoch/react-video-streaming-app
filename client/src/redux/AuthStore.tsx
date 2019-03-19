@@ -1,19 +1,5 @@
 import { PayloadAction, createSlice } from "redux-starter-kit";
 
-//# AuthStore State Schema
-export interface IAuthState {
-  isSignedIn: boolean | null;
-  userId: string | null;
-  gAPIAuthInstance?: gapi.auth2.GoogleAuth | null;
-}
-
-//# AuthStore Availabe Prop Methods
-export interface IAuthReducers {
-  SIGN_IN: (payload?: any) => void;
-  SIGN_OUT: (payload?: any) => void;
-  INIT_GAPI_INSTANCE: (payload?: gapi.auth2.GoogleAuth) => void;
-}
-
 const AuthStore = createSlice({
   //~ Slice name
   slice: "auth_store",
@@ -23,24 +9,27 @@ const AuthStore = createSlice({
     isSignedIn: null,
     userId: null,
     gAPIAuthInstance: null
-  } as IAuthState,
+  } as RVSA.IAuthStoreState,
 
   //~ Reducers
   reducers: {
     //* Set user status to signed in
-    SIGN_IN: (state: IAuthState, action: PayloadAction) => {
+    SIGN_IN: (state: RVSA.IAuthStoreState) => {
       state.isSignedIn = true;
       state.userId = state.gAPIAuthInstance!.currentUser.get().getId();
     },
 
     //* Set user status to signed out
-    SIGN_OUT: (state: IAuthState, _action: PayloadAction) => {
+    SIGN_OUT: (state: RVSA.IAuthStoreState) => {
       state.isSignedIn = false;
       state.userId = null;
     },
 
     //* Initialise a global instance of the Google API
-    INIT_GAPI_INSTANCE: (state: IAuthState, action: PayloadAction) => {
+    INIT_GAPI_INSTANCE: (
+      state: RVSA.IAuthStoreState,
+      action: PayloadAction
+    ) => {
       state.gAPIAuthInstance = action.payload;
     }
   }

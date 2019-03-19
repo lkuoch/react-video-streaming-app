@@ -2,24 +2,11 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import _ from "lodash";
-import {
-  FETCH_STREAM,
-  EDIT_STREAM,
-  IStreamApiProps,
-  IStreamApiState
-} from "../../redux/StreamApiStore";
+import { FETCH_STREAM, EDIT_STREAM } from "../../redux/StreamApiStore";
 import StreamForm, { IFormValues } from "./StreamForm";
+import { RVSA } from "../../react-app-env";
 
-interface IStreamEditState {
-  stream: IStreamApiState;
-}
-
-interface IProps
-  extends IStreamEditState,
-    IStreamApiProps,
-    RouteComponentProps {}
-
-function StreamEdit(props: IProps) {
+function StreamEdit(props: RVSA.Streams.IStreamEditProps) {
   //* On mount
   useEffect(() => {
     props.FETCH_STREAM((props.match.params as any).id);

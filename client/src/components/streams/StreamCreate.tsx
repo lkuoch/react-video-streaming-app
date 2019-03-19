@@ -1,25 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  CREATE_STREAM,
-  IStreamApiProps,
-  IStreamApiState
-} from "../../redux/StreamApiStore";
+import { CREATE_STREAM } from "../../redux/StreamApiStore";
 import StreamForm from "./StreamForm";
+import { RVSA } from "../../react-app-env";
 
-//# Form values expected on submit
-interface IFormValues {
-  title?: string;
-  description?: string;
-}
-
-//# Props available to component
-interface IProps extends IStreamApiProps, IStreamApiState {}
-
-//# Renders form
-function StreamCreate(props: IProps) {
+//! Renders form
+function StreamCreate(props: RVSA.Streams.IStreamCreateProps) {
   //* Callback when submitting form
-  const onSubmit = (formValues: IFormValues) => {
+  const onSubmit = (formValues: RVSA.Streams.IStreamCreateFormValues) => {
     props.CREATE_STREAM(formValues);
   };
 
